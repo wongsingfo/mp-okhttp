@@ -6,6 +6,8 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import group.soar.okhttp.OkHttpClient
+import group.soar.okhttp.Request
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,5 +36,16 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun testOkHttp(): String {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .get()
+            .url("https://www.baidu.com")
+            .build()
+
+        val response = client.newCall(request).execute()
+        return response.body!!.string()
     }
 }
